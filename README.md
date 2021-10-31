@@ -2,9 +2,8 @@
 - [算法](#算法)
     - [归并排序](#归并排序)
     - [快速排序](#快速排序)
-    - [二分查找](#二分查找)
-        - [二分查找(非递归)](#二分查找(非递归))
-        - [二分查找(递归)](#二分查找(递归))
+    - [二分查找(非递归)](#二分查找(非递归))
+    - [二分查找(递归)](#二分查找(递归))
 ## 算法
 ### 归并排序
 ```go
@@ -98,8 +97,7 @@ func Partition(arr []int, start, end int) int {
 }
 ```
 
-### 二分查找
-#### 二分查找(非递归)
+### 二分查找(非递归)
 ```go
 //二分查找(非递归)
 func BinarySearch1(arr []int, target int) int {
@@ -121,7 +119,7 @@ func BinarySearch1(arr []int, target int) int {
 }
 ```
 
-#### 二分查找(递归)
+### 二分查找(递归)
 ```go
 //二分查找递归
 func BinarySearch2(arr []int, target int) int {
