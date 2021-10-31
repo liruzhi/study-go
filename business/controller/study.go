@@ -4,12 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type study struct {}
+type study struct{}
 
-func  NewStudy() *study {
+func NewStudy() *study {
 	return &study{}
 }
 
-func(this *study) Sort(ctx *gin.Context) {
+func (this *study) Sort(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{"msg": "hello study controller"})
 }

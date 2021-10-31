@@ -16,3 +16,15 @@ func TestQuickSort(t *testing.T) {
 	sortedArr := QuickSort(arr)
 	fmt.Println(sortedArr)
 }
+
+func TestBinarySearch1(t *testing.T) {
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 9}
+	target := 10
+	t.Log(BinarySearch1(arr, target))
+}
+
+func TestBinarySearch2(t *testing.T) {
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 9}
+	target := 10
+	t.Log(BinarySearch2(arr, target))
+}

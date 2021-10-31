@@ -91,3 +91,52 @@ func Partition(arr []int, start, end int) int {
 	return i
 }
 ```
+
+### 二分查找
+#### 二分查找(非递归)
+```go
+//二分查找(非递归)
+func BinarySearch1(arr []int, target int) int {
+	left := 0
+	right := len(arr) - 1
+
+	for left <= right {
+		middle := (left + right) / 2
+		if arr[middle] == target {
+			return middle
+		} else if arr[middle] < target {
+			left = middle + 1
+		} else {
+			right = middle - 1
+		}
+	}
+
+	return -1
+}
+```
+
+#### 二分查找(递归)
+```go
+//二分查找递归
+func BinarySearch2(arr []int, target int) int {
+	return BinarySearchC(arr, target, 0, len(arr)-1)
+}
+
+func BinarySearchC(arr []int, target, left, right int) int {
+	if left > right {
+		return -1
+	}
+
+	middle := (left + right) / 2
+
+	if arr[middle] == target {
+		return middle
+	}
+
+	if arr[middle] < target {
+		return BinarySearchC(arr, target, middle+1, right)
+	}
+
+	return BinarySearchC(arr, target, left, middle-1)
+}
+```
