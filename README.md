@@ -5,6 +5,7 @@
     - [二分查找](#二分查找)
         - [二分查找非递归](#二分查找非递归)
         - [二分查找递归](#二分查找递归)
+    - [反转链表](#反转链表)
 ## 算法
 ### 归并排序
 ```go
@@ -138,5 +139,36 @@ func BinarySearchC(arr []int, target, left, right int) int {
 	}
 
 	return BinarySearchC(arr, target, left, middle-1)
+}
+```
+
+### 反转链表
+> https://leetcode-cn.com/problems/reverse-linked-list/
+```go
+给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+
+输入：head = [1,2,3,4,5]
+输出：[5,4,3,2,1]
+```
+![](https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)
+
+```go
+type ListNode struct {
+	Val int
+	Next *ListNode
+}
+
+func reverseList(head *ListNode) *ListNode {
+	var prev *ListNode
+	curr := head
+
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+
+	return prev
 }
 ```
