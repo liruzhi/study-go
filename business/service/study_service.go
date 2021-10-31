@@ -79,8 +79,6 @@ func QuickSortC(arr []int, start, end int) {
 
 	QuickSortC(arr, start, q-1)
 	QuickSortC(arr, q+1, end)
-
-	return
 }
 
 //获取分区点
