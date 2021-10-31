@@ -33,19 +33,16 @@ func MergeSortC(arr []int, start, end int) []int {
 
 //合并两个有序数组
 func MergeTwoSortdArr(arr1 []int, arr2 []int) []int {
-	n := len(arr1)
-	m := len(arr2)
-
-	sorted := make([]int, 0, m+n)
+	sorted := make([]int, 0, len(arr1) + len(arr2))
 	p1, p2 := 0, 0
 
 	for {
-		if p1 == n {
+		if p1 == len(arr1) {
 			sorted = append(sorted, arr2[p2:]...)
 			break
 		}
 
-		if p2 == m {
+		if p2 == len(arr2) {
 			sorted = append(sorted, arr1[p1:]...)
 			break
 		}
