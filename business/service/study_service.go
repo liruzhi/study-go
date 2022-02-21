@@ -163,6 +163,7 @@ func TopK (arr[]int , k int) []int{
 	return arr[TopKPartition(arr, k, 0, len(arr) - 1):]
 }
 
+//获取分区后的第K大的元素的下标
 func TopKPartition(arr []int, k ,start ,end int) int {
 	if len(arr) - start <= k {
 		return start

@@ -57,8 +57,9 @@ func TestCopy(t *testing.T) {
 }
 
 func TestTopK(t *testing.T) {
-	arr := []int{13, 7, 14, 4, 7, 6, 2,8,12, 10, 6, 13, 15}
-	result := TopK(arr, 7)
+	//arr := []int{13, 7, 14, 4, 7, 6, 2,8,12, 10, 6, 13, 15}
+	arr := []int{2,1,1,1,3}
+	result := TopK(arr, 2)
 
 	fmt.Println(result)
 }
