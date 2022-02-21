@@ -78,20 +78,7 @@ func QuickSortC(arr []int, start, end int) {
 	QuickSortC(arr, q+1, end)
 }
 
-//获取分区点
-func Partition(arr []int, start, end int) int {
-	i := start
 
-	for j := start; j <= end-1; j++ {
-		if arr[j] < arr[end] {
-			//互换
-			arr[i], arr[j] = arr[j], arr[i]
-			i++
-		}
-	}
-	arr[i], arr[end] = arr[end], arr[i]
-	return i
-}
 
 //二分查找(非递归)
 func BinarySearch1(arr []int, target int) int {
@@ -162,4 +149,49 @@ func reverseList(head *ListNode) *ListNode {
 	}
 
 	return prev
+}
+
+func For10000() {
+	for j := 0; j < 800000; j++ {
+		if j < 80000 {
+
+		}
+	}
+}
+
+func TopK (arr[]int , k int) []int{
+	return arr[TopKPartition(arr, k, 0, len(arr) - 1):]
+}
+
+func TopKPartition(arr []int, k ,start ,end int) int {
+	if len(arr) - start <= k {
+		return start
+	}
+
+	q := Partition(arr, start, end)
+
+	if q == len(arr) - k {
+		return q
+	}
+
+	if q > len(arr) - k {
+		return TopKPartition(arr, k, start, q-1)
+	}
+
+	return TopKPartition(arr, k, q + 1, end)
+}
+
+//获取分区点
+func Partition(arr []int, start, end int) int {
+	i := start
+
+	for j := start; j <= end-1; j++ {
+		if arr[j] < arr[end] {
+			//互换
+			arr[i], arr[j] = arr[j], arr[i]
+			i++
+		}
+	}
+	arr[i], arr[end] = arr[end], arr[i]
+	return i
 }
