@@ -90,3 +90,37 @@ func TestFindTwoMaxNum(t *testing.T) {
 	fmt.Println(firstMax,secondMax)
 }
 
+func TestA(t *testing.T) {
+	var a uint = 1
+	var b uint = 2
+
+	fmt.Println(a-b)
+}
+
+func BenchmarkBinarySearch1(b *testing.B) {
+
+}
+
+func BenchmarkFor10000(b *testing.B)  {
+	for i:=0;i<b.N;i++ {
+		For10000()
+	}
+}
+
+func TestCopy(t *testing.T) {
+	slice1 := []int{1, 2, 3, 4, 5}
+	slice2 := []int{5, 4, 3}
+
+	//copy(slice2, slice1) // 只会复制slice1的前3个元素到slice2中
+	copy(slice1, slice2) // 只会复制slice2的3个元素到slice1的前3个位置
+
+	fmt.Println(slice1, slice2)
+}
+
+func TestTopK(t *testing.T) {
+	//arr := []int{13, 7, 14, 4, 7, 6, 2,8,12, 10, 6, 13, 15}
+	arr := []int{2,1,1,1,3}
+	result := TopK(arr, 2)
+
+	fmt.Println(result)
+}
