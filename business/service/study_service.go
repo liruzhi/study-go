@@ -1,5 +1,7 @@
 package service
 
+import "math/rand"
+
 type studyService struct {
 }
 
@@ -162,4 +164,15 @@ func reverseList(head *ListNode) *ListNode {
 	}
 
 	return prev
+}
+
+
+func getArr(maxNum int) []int{
+	arr := make([]int, maxNum, maxNum)
+
+	for i:=0;i<maxNum;i++ {
+		arr[i] = rand.Intn(maxNum)
+	}
+
+	return arr
 }

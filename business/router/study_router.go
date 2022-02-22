@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"new-gin-blog/business/controller"
+	"study-go/business/controller"
 )
 
 func studyRouter(e *gin.Engine) {

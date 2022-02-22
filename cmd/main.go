@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"new-gin-blog/business/router"
+	"study-go/business/router"
 )
 
 func main() {
