@@ -213,7 +213,8 @@ func Partition(arr []int, start, end int) int {
 	return i
 }
 
-func handleString(str string) {
+//解析字符串
+func parseString(str string) {
 	//按逗号分割成数组
 	splitedArr := strings.Split(str, ",")
 	//数组下标与引号个数的映射
