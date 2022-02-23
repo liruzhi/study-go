@@ -1,6 +1,10 @@
 package service
 
-import "math/rand"
+import (
+	"fmt"
+	"math/rand"
+	"strings"
+)
 
 type studyService struct {
 }
@@ -207,4 +211,88 @@ func Partition(arr []int, start, end int) int {
 	arr[i], arr[end] = arr[end], arr[i]
 
 	return i
+}
+
+
+//handleString(`2,John,45,"足球,摄影",New York`)
+//handleString(`3,Carter Job,33,"""健身"",远足,"河北,石家庄"`)
+
+func handleString(str string) {
+	arr := strings.Split(str, ",")
+
+	countMap := make(map[int]int)
+	startEndMap := make(map[int]int)
+
+	resultArr := make([]string, 0)
+
+	start := -1
+
+	for i, v := range arr {
+		countMap[i] = getCount([]rune(v))
+		if countMap[i] > 0 {
+			if countMap[i]%2 == 1 {
+				if start < 0 {
+					start = i
+				} else {
+					startEndMap[start] = i
+					start = -1
+				}
+			}
+		}
+	}
+
+	var end = -1
+	var ss string
+	for i, v := range arr {
+		if startEndMap[i] > 0 && end == -1 {
+			end = startEndMap[i]
+		}
+
+		if end == -1 {
+			resultArr = append(resultArr, replaceQuotation(v))
+		} else {
+			if end == i {
+				ss = ss + replaceQuotation(v)
+				end = -1
+				resultArr = append(resultArr, ss)
+			} else {
+				ss = ss + "," + replaceQuotation(v)
+			}
+		}
+	}
+
+	fmt.Println(strings.Join(resultArr, "\t"))
+
+	//fmt.Println(arr)
+}
+
+func replaceQuotation(params string) string {
+
+	runeParams := []rune(params)
+
+	qIndex := 0
+	result := make([]rune, 0)
+	for _, v := range runeParams {
+		if string(v) == `"` {
+			qIndex++
+			if qIndex%2 == 0 {
+				result = append(result, v)
+			}
+		} else {
+			result = append(result, v)
+		}
+	}
+
+	return string(result)
+}
+
+func getCount(params []rune) int {
+	var count int
+	for _, v := range params {
+		if string(v) == `"` {
+			count++
+		}
+	}
+	fmt.Println(string(params), "count", count)
+	return count
 }
