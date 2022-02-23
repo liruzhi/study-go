@@ -252,18 +252,18 @@ func ParseString(str string) {
 
 		//独立字段直接追加
 		if end == -1 {
-			resultArr = append(resultArr, ReplaceQuotation(v))
+			resultArr = append(resultArr, ReplaceQuote(v))
 			continue
 		}
 
 		//非独立字段需要拼接
 		if end != i {
-			needJoinColumn = needJoinColumn +  ReplaceQuotation(v) + ","
+			needJoinColumn = needJoinColumn +  ReplaceQuote(v) + ","
 			continue
 		}
 
 		//非独立字段部分结尾
-		needJoinColumn = needJoinColumn + ReplaceQuotation(v)
+		needJoinColumn = needJoinColumn + ReplaceQuote(v)
 		resultArr = append(resultArr, needJoinColumn)
 
 		//拼接结束，还原
@@ -273,7 +273,7 @@ func ParseString(str string) {
 	fmt.Println(strings.Join(resultArr, "\t"))
 }
 
-func ReplaceQuotation(str string) string {
+func ReplaceQuote(str string) string {
 	strRuneArr := []rune(str)
 	result := make([]rune, 0)
 	//连续引号的个数
