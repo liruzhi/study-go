@@ -130,8 +130,8 @@ func TestHandleString(t *testing.T) {
 	str2 := `3,Carter Job,33,"""健⾝"",远⾜","河北,⽯家庄"`
 	str3 := `4,Steve,33,"⼤屏幕164""","DC""Home"""`
 	str4 := `5,"Jul,y",33,Football,Canada`
-	parseString(str1)
-	parseString(str2)
-	parseString(str3)
-	parseString(str4)
+	ParseString(str1)
+	ParseString(str2)
+	ParseString(str3)
+	ParseString(str4)
 }

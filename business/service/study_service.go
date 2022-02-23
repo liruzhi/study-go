@@ -214,7 +214,7 @@ func Partition(arr []int, start, end int) int {
 }
 
 //解析字符串
-func parseString(str string) {
+func ParseString(str string) {
 	//按逗号分割成数组
 	splitedArr := strings.Split(str, ",")
 	//数组下标与引号个数的映射
@@ -226,7 +226,7 @@ func parseString(str string) {
 
 	for i, v := range splitedArr {
 		//获取引号的数量
-		indexQuoteCountMap[i] = getQuoteCount([]rune(v))
+		indexQuoteCountMap[i] = GetQuoteCount([]rune(v))
 		//获取两个相邻的引号数量为奇数的坐标，构成一个区间map
 		if indexQuoteCountMap[i]%2 == 0 {
 			continue
@@ -252,18 +252,18 @@ func parseString(str string) {
 
 		//独立字段直接追加
 		if end == -1 {
-			resultArr = append(resultArr, replaceQuotation(v))
+			resultArr = append(resultArr, ReplaceQuotation(v))
 			continue
 		}
 
 		//非独立字段需要拼接
 		if end != i {
-			needJoinColumn = needJoinColumn +  replaceQuotation(v) + ","
+			needJoinColumn = needJoinColumn +  ReplaceQuotation(v) + ","
 			continue
 		}
 
 		//非独立字段部分结尾
-		needJoinColumn = needJoinColumn + replaceQuotation(v)
+		needJoinColumn = needJoinColumn + ReplaceQuotation(v)
 		resultArr = append(resultArr, needJoinColumn)
 
 		//拼接结束，还原
@@ -273,7 +273,7 @@ func parseString(str string) {
 	fmt.Println(strings.Join(resultArr, "\t"))
 }
 
-func replaceQuotation(str string) string {
+func ReplaceQuotation(str string) string {
 	strRuneArr := []rune(str)
 	result := make([]rune, 0)
 	//连续引号的个数
@@ -292,7 +292,7 @@ func replaceQuotation(str string) string {
 	return string(result)
 }
 
-func getQuoteCount(params []rune) (count int) {
+func GetQuoteCount(params []rune) (count int) {
 	for _, v := range params {
 		if string(v) == `"` {
 			count++
