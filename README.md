@@ -181,7 +181,7 @@ func TopK (arr[]int , k int) []int{
 }
 
 func TopKPartition(arr []int, k ,start ,end int) int {
-	if len(arr) - start <= k {
+	if start >= len(arr) - k {
 		return start
 	}
 
@@ -192,7 +192,7 @@ func TopKPartition(arr []int, k ,start ,end int) int {
 	}
 
 	if q > len(arr) - k {
-		return TopKPartition(arr, k, start, q-1)
+		return TopKPartition(arr, k, start, q - 1)
 	}
 
 	return TopKPartition(arr, k, q + 1, end)
