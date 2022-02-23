@@ -213,86 +213,89 @@ func Partition(arr []int, start, end int) int {
 	return i
 }
 
-
-//handleString(`2,John,45,"足球,摄影",New York`)
-//handleString(`3,Carter Job,33,"""健身"",远足,"河北,石家庄"`)
-
 func handleString(str string) {
-	arr := strings.Split(str, ",")
-
-	countMap := make(map[int]int)
+	//按逗号分割成数组
+	splitedArr := strings.Split(str, ",")
+	//数组下标与引号个数的映射
+	indexQuoteCountMap := make(map[int]int)
+	//非独立字段的起始点映射
 	startEndMap := make(map[int]int)
-
 	resultArr := make([]string, 0)
-
 	start := -1
 
-	for i, v := range arr {
-		countMap[i] = getCount([]rune(v))
-		if countMap[i] > 0 {
-			if countMap[i]%2 == 1 {
-				if start < 0 {
-					start = i
-				} else {
-					startEndMap[start] = i
-					start = -1
-				}
-			}
+	for i, v := range splitedArr {
+		//获取引号的数量
+		indexQuoteCountMap[i] = getQuoteCount([]rune(v))
+		//获取两个相邻的引号数量为奇数的坐标，构成一个区间map
+		if indexQuoteCountMap[i]%2 == 0 {
+			continue
+		}
+
+		//非独立字段起点
+		if start == -1 {
+			start = i
+		} else {
+			//非独立字段终点
+			startEndMap[start] = i
+			start = -1
 		}
 	}
 
-	var end = -1
-	var ss string
-	for i, v := range arr {
-		if startEndMap[i] > 0 && end == -1 {
+	end := -1
+	//需要拼接的字段
+	var needJoinColumn string
+	for i, v := range splitedArr {
+		if startEndMap[i] > 0 {
 			end = startEndMap[i]
 		}
 
+		//独立字段直接追加
 		if end == -1 {
 			resultArr = append(resultArr, replaceQuotation(v))
-		} else {
-			if end == i {
-				ss = ss + replaceQuotation(v)
-				end = -1
-				resultArr = append(resultArr, ss)
-			} else {
-				ss = ss + "," + replaceQuotation(v)
-			}
+			continue
 		}
+
+		//非独立字段需要拼接
+		if end != i {
+			needJoinColumn = needJoinColumn +  replaceQuotation(v) + ","
+			continue
+		}
+
+		//非独立字段部分结尾
+		needJoinColumn = needJoinColumn + replaceQuotation(v)
+		resultArr = append(resultArr, needJoinColumn)
+
+		//拼接结束，还原
+		needJoinColumn = ""
+		end = -1
 	}
-
 	fmt.Println(strings.Join(resultArr, "\t"))
-
-	//fmt.Println(arr)
 }
 
-func replaceQuotation(params string) string {
-
-	runeParams := []rune(params)
-
-	qIndex := 0
+func replaceQuotation(str string) string {
+	strRuneArr := []rune(str)
 	result := make([]rune, 0)
-	for _, v := range runeParams {
+	//连续引号的个数
+	continuousQuote := 0
+	for _, v := range strRuneArr {
 		if string(v) == `"` {
-			qIndex++
-			if qIndex%2 == 0 {
+			continuousQuote++
+			if continuousQuote%2 == 0 {
 				result = append(result, v)
 			}
 		} else {
+			continuousQuote = 0
 			result = append(result, v)
 		}
 	}
-
 	return string(result)
 }
 
-func getCount(params []rune) int {
-	var count int
+func getQuoteCount(params []rune) (count int) {
 	for _, v := range params {
 		if string(v) == `"` {
 			count++
 		}
 	}
-	fmt.Println(string(params), "count", count)
 	return count
 }

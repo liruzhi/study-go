@@ -124,3 +124,14 @@ func TestTopK(t *testing.T) {
 
 	fmt.Println(result)
 }
+
+func TestHandleString(t *testing.T) {
+	str1 := `2,John,45,"⾜球,摄影",New York`
+	str2 := `3,Carter Job,33,"""健⾝"",远⾜","河北,⽯家庄"`
+	str3 := `4,Steve,33,"⼤屏幕164""","DC""Home"""`
+	str4 := `5,"Jul,y",33,Football,Canada`
+	handleString(str1)
+	handleString(str2)
+	handleString(str3)
+	handleString(str4)
+}
