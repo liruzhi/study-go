@@ -279,13 +279,13 @@ func ReplaceQuote(str string) string {
 	//连续引号的个数
 	continuousQuote := 0
 	for _, v := range strRuneArr {
-		if string(v) == `"` {
-			continuousQuote++
-			if continuousQuote%2 == 0 {
-				result = append(result, v)
-			}
-		} else {
+		if string(v) != `"` {
 			continuousQuote = 0
+			result = append(result, v)
+			continue
+		}
+		continuousQuote++
+		if continuousQuote%2 == 0 {
 			result = append(result, v)
 		}
 	}
