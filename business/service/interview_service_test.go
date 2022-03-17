@@ -5,5 +5,12 @@ import (
 )
 
 func TestOutputStrAndNum(t *testing.T) {
+	//for i:='A';i<='Z';i++ {
+	//	fmt.Println(string(i))
+	//}
 	OutputStrAndNum()
+}
+
+func TestDumpNum(t *testing.T) {
+	DumpNum()
 }

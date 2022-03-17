@@ -1,6 +1,9 @@
 package service
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 var chan1 = make(chan int, 1)
 var chan2 = make(chan int)
@@ -31,6 +34,32 @@ func f2() {
 	close(chan1)
 	close(chan2)
 	close(finishChan)
+}
+
+//两个协程交替打印奇偶数，一个channel
+
+func DumpNum() {
+	ch := make(chan int)
+
+	go func() {
+		for i:=1;i<=100;i++ {
+			ch<-1
+			if i%2 == 1 {
+				fmt.Println("g1---", i)
+			}
+		}
+	}()
+
+	go func() {
+		for i:=1;i<=100;i++ {
+			<-ch
+			if i%2 == 0 {
+				fmt.Println("g2---", i)
+			}
+		}
+	}()
+
+	time.Sleep(time.Second)
 }
 
 
