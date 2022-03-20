@@ -14,3 +14,7 @@ func TestOutputStrAndNum(t *testing.T) {
 func TestDumpNum(t *testing.T) {
 	DumpNum()
 }
+
+func TestDumpLevelTree(t *testing.T) {
+	DumpLevelTree()
+}

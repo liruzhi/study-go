@@ -63,3 +63,62 @@ func DumpNum() {
 }
 
 
+
+//https://blog.csdn.net/Lyon_Nee/article/details/119171977
+type BinaryTree struct {
+	Value     int         `json:"value,omitempty"`
+	LeftNode  *BinaryTree `json:"left_node,omitempty"`
+	RightNode *BinaryTree `json:"right_node,omitempty"`
+}
+
+//根节点
+var rootNode *BinaryTree = &BinaryTree{
+	Value: 1,
+	LeftNode: &BinaryTree{
+		Value: 2,
+		LeftNode: &BinaryTree{
+			Value: 4,
+			RightNode: &BinaryTree{
+				Value:     6,
+				LeftNode:  &BinaryTree{Value: 7},
+				RightNode: &BinaryTree{Value: 8},
+			},
+		},
+	},
+	RightNode: &BinaryTree{
+		Value:     3,
+		RightNode: &BinaryTree{Value: 5},
+	},
+}
+
+func DumpLevelTree() {
+	LevelTraversal(rootNode)
+}
+
+//按层遍历树
+func LevelTraversal(tree *BinaryTree) {
+	if tree == nil {
+		return
+	}
+	LevelTraversalC([]*BinaryTree{tree})
+}
+
+func LevelTraversalC(treeSlice []*BinaryTree) {
+	if len(treeSlice) == 0 {
+		return
+	}
+
+	nextLevel := make([]*BinaryTree, 0)
+	for _,v := range treeSlice {
+		fmt.Println(v.Value)
+
+		if v.LeftNode != nil {
+			nextLevel = append(nextLevel, v.LeftNode)
+		}
+
+		if v.RightNode != nil {
+			nextLevel = append(nextLevel, v.RightNode)
+		}
+	}
+	LevelTraversalC(nextLevel)
+}
