@@ -33,4 +33,24 @@ func f2() {
 	close(finishChan)
 }
 
+//给定一个有序数组，返回平方后依然有序的数组
+func GetSquareSortedArr(arr []int) []int {
+	n := len(arr)
+
+	result := make([]int, n)
+	i,j := 0,n - 1
+
+	for index:= n-1;index >=0;index-- {
+		if v,w := arr[i] * arr[i],arr[j] * arr[j];v > w {
+			result[index] = v
+			i++
+		} else {
+			result[index] = w
+			j--
+		}
+	}
+
+	return result
+}
+
 
