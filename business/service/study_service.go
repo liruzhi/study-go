@@ -305,11 +305,11 @@ func GetQuoteCount(params []rune) (count int) {
 //给定两个从大到小排好序的数组A和B,给定K，找到A和B中d第K大的元素
 // A=[10,7,3] B=[9,6]   K=2 return 9; K=1 return 10
 func FindTopK(A, B []int, K int) (int, error) {
-	i, j := 0, 0
 	if K > len(A)+len(B) || K < 1 {
 		return -1, errors.New("K is wrong")
 	}
 
+	i, j := 0, 0
 	for {
 		if i == len(A) {
 			return B[K-i-1], nil
