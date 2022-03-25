@@ -135,3 +135,9 @@ func TestHandleString(t *testing.T) {
 	ParseString(str3)
 	ParseString(str4)
 }
+
+func TestBobbleSort(t *testing.T) {
+	arr:= []int{3,1,5,9,2,6,4,7}
+	BobbleSort(arr)
+	fmt.Println(arr)
+}
