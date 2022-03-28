@@ -25,3 +25,13 @@ func TestGetSquareSortedArr(t *testing.T) {
 	result := GetSquareSortedArr(arr)
 	fmt.Println(result)
 }
+
+func TestLengthOfLongestSubstring(t *testing.T) {
+	//str := "abcabcdefghijklmffffabcdegh"
+	//str := "pwwkew"
+	//str := "pwwpkew"
+	//str := "abcabcbb"
+	str := "bbbbb"
+
+	fmt.Println(LengthOfLongestSubstring(str))
+}

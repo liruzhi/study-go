@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -141,3 +142,72 @@ func GetSquareSortedArr(arr []int) []int {
 
 	return result
 }
+
+//3. 无重复字符的最长子串
+//https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+//https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/ 答案
+func LengthOfLongestSubstring(str string) int {
+	indexMap := make(map[byte]int)
+	left, ans:= 0, 0
+
+	for i:=0;i<len(str);i++{
+		if v,ok := indexMap[str[i]];ok && left < v + 1{
+			left = v + 1
+		}
+
+		indexMap[str[i]] = i
+
+		if ans < i + 1 - left {
+			ans = i + 1 - left
+		}
+	}
+
+	return ans
+}
+
+//非最优
+func LengthOfLongestSubstring1(str string) int{
+	var window string
+	var max int
+	var start int
+
+	for i:=0;i<len(str);i++ {
+
+		if index := strings.IndexByte(window, str[i]);index != -1 {
+			start = start + index + 1
+		}
+
+		window  = str[start:i+1]
+
+		if len(window) > max {
+			max = len(window)
+		}
+	}
+
+	return max
+}
+
+
+
+//class Solution {
+//public int lengthOfLongestSubstring(String s) {
+//if (s.length()==0) return 0;
+//HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+//int max = 0;
+//int left = 0;
+//for(int i = 0; i < s.length(); i ++){
+//if(map.containsKey(s.charAt(i))){
+//left = Math.max(left,map.get(s.charAt(i)) + 1);
+//}
+//map.put(s.charAt(i),i);
+//max = Math.max(max,i-left+1);
+//}
+//return max;
+//
+//}
+//}
+//
+//作者：powcai
+//链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/
+//来源：力扣（LeetCode）
+//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
