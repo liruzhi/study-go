@@ -222,11 +222,11 @@ func LengthOfLongestSubstring1(str string) int{
 
 //https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
 //429. N 叉树的层序遍历
-
 type Node struct {
      Val int
      Children []*Node
 }
+
 func levelOrder(root *Node) [][]int {
 	res := make([][]int,0)
 
@@ -243,16 +243,16 @@ func levelOrderC(nodes []*Node, res [][]int) [][]int{
 	}
 
 	curLayerValue := make([]int, 0)
-	nextLayer := make([]*Node, 0)
+	nextLayerNode := make([]*Node, 0)
 
 	for i := range nodes {
 		curLayerValue = append(curLayerValue, nodes[i].Val)
 		if len(nodes[i].Children) > 0 {
-			nextLayer = append(nextLayer, nodes[i].Children...)
+			nextLayerNode = append(nextLayerNode, nodes[i].Children...)
 		}
 	}
 
 	res = append(res,curLayerValue)
 
-	return levelOrderC(nextLayer, res)
+	return levelOrderC(nextLayerNode, res)
 }
