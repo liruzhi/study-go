@@ -256,3 +256,49 @@ func levelOrderC(nodes []*Node, res [][]int) [][]int{
 
 	return levelOrderC(nextLayerNode, res)
 }
+
+type Tree struct {
+	Val   int
+	Left  *Tree
+	Right *Tree
+}
+
+//判断一个树是否为平衡二叉树
+func IsBalanceTree(tree *Tree) bool {
+	if tree == nil {
+		return true
+	}
+
+	isBalance, _ := TreeLevel(tree)
+	return isBalance
+}
+
+func TreeLevel(tree *Tree) (bool, int) {
+
+	if tree == nil {
+		return true, 0
+	}
+	leftIsBalance, leftLevel := TreeLevel(tree.Left)
+	rightIsBalance, rightLevel := TreeLevel(tree.Right)
+
+	if leftIsBalance && rightIsBalance && abs(leftLevel-rightLevel) < 2 {
+
+		return true, max(leftLevel+1, rightLevel+1)
+	}
+
+	return false, 0
+}
+
+func abs(parmas int) int {
+	if parmas >= 0 {
+		return parmas
+	}
+	return 0 - parmas
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
