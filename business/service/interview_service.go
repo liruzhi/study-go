@@ -211,3 +211,48 @@ func LengthOfLongestSubstring1(str string) int{
 //链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/
 //来源：力扣（LeetCode）
 //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+//https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+//429. N 叉树的层序遍历
+
+type Node struct {
+     Val int
+     Children []*Node
+}
+func levelOrder(root *Node) [][]int {
+	res := make([][]int,0)
+
+	if root == nil {
+		return res
+	}
+
+	return levelOrderC([]*Node{root}, res)
+}
+
+func levelOrderC(nodes []*Node, res [][]int) [][]int{
+	if len(nodes) == 0 {
+		return res
+	}
+
+	curLayerValue := make([]int, 0)
+	nextLayer := make([]*Node, 0)
+
+	for i := range nodes {
+		curLayerValue = append(curLayerValue, nodes[i].Val)
+		if len(nodes[i].Children) > 0 {
+			nextLayer = append(nextLayer, nodes[i].Children...)
+		}
+	}
+
+	res = append(res,curLayerValue)
+
+	return levelOrderC(nextLayer, res)
+}
