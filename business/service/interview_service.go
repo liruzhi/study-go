@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -301,4 +302,39 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+//两字符串相加
+//https://leetcode-cn.com/problems/add-strings/
+func AddStrings(num1 string, num2 string) string {
+	i,j := len(num1)-1, len(num2)-1
+	var carry byte
+	var result string
+
+	for i>=0 || j >=0 {
+		var n byte
+		var m byte
+
+		if i>= 0 {
+			n = num1[i] - '0'
+		}
+
+		if j >= 0 {
+			m = num2[j] - '0'
+		}
+
+		tmp := (n + m + carry) % 10
+
+		result = strconv.Itoa(int(tmp)) + result
+
+		carry = (n + m + carry)/10
+		i--
+		j--
+	}
+
+	if carry == 1 {
+		result = "1" + result
+	}
+
+	return result
 }

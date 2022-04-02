@@ -35,3 +35,14 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 
 	fmt.Println(LengthOfLongestSubstring(str))
 }
+
+func TestAddStrings(t *testing.T) {
+	num1 := "456"
+	num2 := "77"
+
+	result := AddStrings(num1,num2)
+
+	fmt.Println(result)
+
+	fmt.Println('0')
+}
